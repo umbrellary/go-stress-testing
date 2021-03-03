@@ -10,6 +10,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"go-stress-testing/helper"
 	"go-stress-testing/model"
 	"go-stress-testing/server"
 	"runtime"
@@ -59,9 +60,9 @@ func main() {
 
 	runtime.GOMAXPROCS(1)
 	if concurrency == 0 || totalNumber == 0 || (requestUrl == "" && path == "") {
-		fmt.Printf("示例: go run main.go -c 1 -n 1 -u https://www.baidu.com/ \n")
-		fmt.Printf("压测地址或curl路径必填 \n")
-		fmt.Printf("当前请求参数: -c %d -n %d -d %v -u %s \n", concurrency, totalNumber, debugStr, requestUrl)
+		helper.Clog.Infof("示例: go run main.go -c 1 -n 1 -u https://www.baidu.com/ \n")
+		helper.Clog.Infof("压测地址或curl路径必填 \n")
+		helper.Clog.Infof("当前请求参数: -c %d -n %d -d %v -u %s \n", concurrency, totalNumber, debugStr, requestUrl)
 		flag.Usage()
 
 		return
@@ -69,12 +70,12 @@ func main() {
 	debug := strings.ToLower(debugStr) == "true"
 	request, err := model.NewRequest(requestUrl, verify, 0, debug, path, headers, body)
 	if err != nil {
-		fmt.Printf("参数不合法 %v \n", err)
+		helper.Clog.Infof("参数不合法 %v \n", err)
 
 		return
 	}
 
-	fmt.Printf("\n 开始启动  并发数:%d 请求数:%d 请求参数: \n", concurrency, totalNumber)
+	helper.Clog.Infof("## 开始启动 -> 并发数:%d 请求数:%d\n\n", concurrency, totalNumber)
 	request.Print()
 
 	// 开始处理

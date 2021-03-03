@@ -51,7 +51,7 @@ func HttpRequest(method, url string, body io.Reader, headers map[string]string, 
 		if headers == nil {
 			headers = make(map[string]string)
 		}
-		headers["Content-Type"] = "application/x-www-form-urlencoded; charset=utf-8"
+		// headers["Content-Type"] = "application/x-www-form-urlencoded; charset=utf-8"
 	}
 
 	for key, value := range headers {

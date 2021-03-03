@@ -10,6 +10,7 @@ package model
 import (
 	"errors"
 	"fmt"
+	"go-stress-testing/helper"
 	"io"
 	"net/http"
 	"strings"
@@ -145,7 +146,7 @@ func NewRequest(url string, verify string, timeout time.Duration, debug bool, pa
 			method = "POST"
 			body = reqBody
 
-			headers["Content-Type"] = "application/x-www-form-urlencoded; charset=utf-8"
+			// headers["Content-Type"] = "application/x-www-form-urlencoded; charset=utf-8"
 		}
 
 		for _, v := range reqHeaders {
@@ -249,10 +250,11 @@ func (r *Request) Print() {
 		return
 	}
 
-	result := fmt.Sprintf("request:\n form:%s \n url:%s \n method:%s \n headers:%v \n", r.Form, r.Url, r.Method, r.Headers)
-	result = fmt.Sprintf("%s data:%v \n", result, r.Body)
-	result = fmt.Sprintf("%s verify:%s \n timeout:%s \n debug:%v \n", result, r.Verify, r.Timeout, r.Debug)
-	fmt.Println(result)
+	helper.Clog.Warn("URL: [", r.Url, "]\n")
+	helper.Clog.Warn("Method: [", r.Method, "]\n")
+	helper.Clog.Warn("Timeout: [", r.Timeout, "]\n")
+	helper.Clog.Warn("Headers: [", r.Headers, "]\n")
+	helper.Clog.Warn("Data: [", r.Body, "]\n")
 
 	return
 }

@@ -3,6 +3,7 @@ module go-stress-testing
 go 1.14
 
 require (
+	github.com/fatih/color v1.10.0
 	github.com/golang/protobuf v1.4.2
 	golang.org/x/net v0.0.0-20190724013045-ca1201d0de80
 	golang.org/x/text v0.3.0

@@ -122,13 +122,10 @@ func ReceivingResults(concurrent uint64, ch <-chan *model.RequestResults, wg *sy
 
 	fmt.Printf("\n\n")
 
-	fmt.Println("*************************  结果 stat  ****************************")
 	fmt.Println("处理协程数量:", concurrent)
 	// fmt.Println("处理协程数量:", concurrent, "程序处理总时长:", fmt.Sprintf("%.3f", float64(processingTime/concurrent)/1e9), "秒")
-	fmt.Println("请求总数（并发数*请求数 -c * -n）:", successNum+failureNum, "总请求时间:", fmt.Sprintf("%.3f", float64(requestTime)/1e9),
-		"秒", "successNum:", successNum, "failureNum:", failureNum)
-
-	fmt.Println("*************************  结果 end   ****************************")
+	fmt.Println("请求总数(并发数*请求数):", successNum+failureNum, "总请求时间:", fmt.Sprintf("%.3f", float64(requestTime)/1e9),
+		"秒", "成功请求数:", successNum, "失败请求数:", failureNum)
 
 	fmt.Printf("\n\n")
 }
